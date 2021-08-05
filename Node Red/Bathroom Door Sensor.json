@@ -1,0 +1,374 @@
+[
+    {
+        "id": "ee41f9cc.65c2a8",
+        "type": "tab",
+        "label": "Bathroom Door Sensor",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "f77ccb14.6a8768",
+        "type": "server-state-changed",
+        "z": "ee41f9cc.65c2a8",
+        "name": "Door Open/Closed",
+        "server": "b9b14ebe.542fc",
+        "version": 3,
+        "exposeToHomeAssistant": false,
+        "haConfig": [
+            {
+                "property": "name",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            }
+        ],
+        "entityidfilter": "binary_sensor.door_gauge",
+        "entityidfiltertype": "exact",
+        "outputinitially": false,
+        "state_type": "str",
+        "haltifstate": "off",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "outputs": 2,
+        "output_only_on_state_change": true,
+        "for": 0,
+        "forType": "num",
+        "forUnits": "minutes",
+        "ignorePrevStateNull": false,
+        "ignorePrevStateUnknown": false,
+        "ignorePrevStateUnavailable": false,
+        "ignoreCurrentStateUnknown": false,
+        "ignoreCurrentStateUnavailable": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            }
+        ],
+        "x": 170,
+        "y": 160,
+        "wires": [
+            [
+                "3a52b02e.0b4eb"
+            ],
+            [
+                "19b0c96f.94c087"
+            ]
+        ]
+    },
+    {
+        "id": "3a52b02e.0b4eb",
+        "type": "api-call-service",
+        "z": "ee41f9cc.65c2a8",
+        "name": "Lights On",
+        "server": "b9b14ebe.542fc",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "light",
+        "service": "turn_on",
+        "entityId": "light.lower_bathroom_ceiling_light",
+        "data": "",
+        "dataType": "json",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 380,
+        "y": 120,
+        "wires": [
+            [
+                "b0dcd67c.01c178"
+            ]
+        ]
+    },
+    {
+        "id": "94b516ba.774038",
+        "type": "api-call-service",
+        "z": "ee41f9cc.65c2a8",
+        "name": "Lights Off",
+        "server": "b9b14ebe.542fc",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "light",
+        "service": "turn_off",
+        "entityId": "light.lower_bathroom_ceiling_light",
+        "data": "",
+        "dataType": "json",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 560,
+        "y": 220,
+        "wires": [
+            [
+                "9b09b28.73da05"
+            ]
+        ]
+    },
+    {
+        "id": "19b0c96f.94c087",
+        "type": "delay",
+        "z": "ee41f9cc.65c2a8",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 260,
+        "y": 220,
+        "wires": [
+            [
+                "def273fb.41866"
+            ]
+        ]
+    },
+    {
+        "id": "b0dcd67c.01c178",
+        "type": "delay",
+        "z": "ee41f9cc.65c2a8",
+        "name": "",
+        "pauseType": "delayv",
+        "timeout": "30",
+        "timeoutUnits": "minutes",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 560,
+        "y": 80,
+        "wires": [
+            [
+                "2ad2c508.524a4a"
+            ]
+        ]
+    },
+    {
+        "id": "2ad2c508.524a4a",
+        "type": "api-call-service",
+        "z": "ee41f9cc.65c2a8",
+        "name": "Lights Off",
+        "server": "b9b14ebe.542fc",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "light",
+        "service": "turn_off",
+        "entityId": "light.lower_bathroom_ceiling_light",
+        "data": "",
+        "dataType": "json",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 740,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9b09b28.73da05",
+        "type": "change",
+        "z": "ee41f9cc.65c2a8",
+        "name": "Override Delay",
+        "rules": [
+            {
+                "t": "set",
+                "p": "reset",
+                "pt": "msg",
+                "to": "1",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 740,
+        "y": 220,
+        "wires": [
+            [
+                "b0dcd67c.01c178"
+            ]
+        ]
+    },
+    {
+        "id": "def273fb.41866",
+        "type": "api-current-state",
+        "z": "ee41f9cc.65c2a8",
+        "name": "Confirm Door Open/Closed",
+        "server": "b9b14ebe.542fc",
+        "version": 2,
+        "outputs": 2,
+        "halt_if": "off",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "binary_sensor.door_gauge",
+        "state_type": "str",
+        "blockInputOverrides": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            }
+        ],
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 420,
+        "y": 280,
+        "wires": [
+            [],
+            [
+                "94b516ba.774038"
+            ]
+        ]
+    },
+    {
+        "id": "8698e6a4.2e32e8",
+        "type": "server-state-changed",
+        "z": "ee41f9cc.65c2a8",
+        "name": "Is Bathroom Light On?",
+        "server": "b9b14ebe.542fc",
+        "version": 3,
+        "exposeToHomeAssistant": false,
+        "haConfig": [
+            {
+                "property": "name",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            }
+        ],
+        "entityidfilter": "light.lower_bathroom_ceiling_light",
+        "entityidfiltertype": "exact",
+        "outputinitially": false,
+        "state_type": "str",
+        "haltifstate": "on",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "outputs": 2,
+        "output_only_on_state_change": true,
+        "for": 0,
+        "forType": "num",
+        "forUnits": "minutes",
+        "ignorePrevStateNull": false,
+        "ignorePrevStateUnknown": false,
+        "ignorePrevStateUnavailable": false,
+        "ignoreCurrentStateUnknown": false,
+        "ignoreCurrentStateUnavailable": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            }
+        ],
+        "x": 180,
+        "y": 420,
+        "wires": [
+            [
+                "f7695d51.e38ca"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "d91cef03.138fa",
+        "type": "delay",
+        "z": "ee41f9cc.65c2a8",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "5",
+        "timeoutUnits": "minutes",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 180,
+        "y": 280,
+        "wires": [
+            [
+                "def273fb.41866"
+            ]
+        ]
+    },
+    {
+        "id": "f7695d51.e38ca",
+        "type": "api-current-state",
+        "z": "ee41f9cc.65c2a8",
+        "name": "Door Open",
+        "server": "b9b14ebe.542fc",
+        "version": 2,
+        "outputs": 2,
+        "halt_if": "on",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "binary_sensor.door_gauge",
+        "state_type": "str",
+        "blockInputOverrides": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            }
+        ],
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 190,
+        "y": 340,
+        "wires": [
+            [
+                "d91cef03.138fa"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "b9b14ebe.542fc",
+        "type": "server",
+        "name": "Home Assistant",
+        "version": 1,
+        "legacy": false,
+        "addon": true,
+        "rejectUnauthorizedCerts": true,
+        "ha_boolean": "y|yes|true|on|home|open",
+        "connectionDelay": true,
+        "cacheJson": true
+    }
+]

@@ -1,0 +1,766 @@
+[
+    {
+        "id": "509b5567.a7a30c",
+        "type": "tab",
+        "label": "Washing Machine",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "6d98d11f.1b64b",
+        "type": "server-state-changed",
+        "z": "509b5567.a7a30c",
+        "name": "State of Washing Machine",
+        "server": "b9b14ebe.542fc",
+        "version": 3,
+        "exposeToHomeAssistant": false,
+        "haConfig": [
+            {
+                "property": "name",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            }
+        ],
+        "entityidfilter": "sensor.washing_machine_2_power",
+        "entityidfiltertype": "exact",
+        "outputinitially": false,
+        "state_type": "str",
+        "haltifstate": "3.8",
+        "halt_if_type": "num",
+        "halt_if_compare": "gte",
+        "outputs": 2,
+        "output_only_on_state_change": true,
+        "for": "1.5",
+        "forType": "num",
+        "forUnits": "minutes",
+        "ignorePrevStateNull": false,
+        "ignorePrevStateUnknown": false,
+        "ignorePrevStateUnavailable": false,
+        "ignoreCurrentStateUnknown": false,
+        "ignoreCurrentStateUnavailable": false,
+        "outputProperties": [
+            {
+                "property": "topic",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "triggerId"
+            }
+        ],
+        "x": 230,
+        "y": 160,
+        "wires": [
+            [
+                "db44a5ff.735248"
+            ],
+            [
+                "ae64a9e4.8d65e8"
+            ]
+        ]
+    },
+    {
+        "id": "11acc240.980d2e",
+        "type": "api-call-service",
+        "z": "509b5567.a7a30c",
+        "name": "Display Entities Off",
+        "server": "b9b14ebe.542fc",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "input_boolean",
+        "service": "turn_off",
+        "entityId": "input_boolean.party_on, input_boolean.party_off, input_boolean.washing_finished",
+        "data": "",
+        "dataType": "jsonata",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 770,
+        "y": 140,
+        "wires": [
+            [
+                "49cf646f.ad6a7c"
+            ]
+        ]
+    },
+    {
+        "id": "49cf646f.ad6a7c",
+        "type": "api-call-service",
+        "z": "509b5567.a7a30c",
+        "name": "Display Entities On",
+        "server": "b9b14ebe.542fc",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "input_boolean",
+        "service": "turn_on",
+        "entityId": "input_boolean.washing_started",
+        "data": "",
+        "dataType": "jsonata",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 1010,
+        "y": 140,
+        "wires": [
+            [
+                "a546cb2.b869438"
+            ]
+        ]
+    },
+    {
+        "id": "ae64a9e4.8d65e8",
+        "type": "delay",
+        "z": "509b5567.a7a30c",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "10",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 180,
+        "y": 240,
+        "wires": [
+            [
+                "65f82fcf.bba87"
+            ]
+        ]
+    },
+    {
+        "id": "ee42e8e8.78a238",
+        "type": "api-current-state",
+        "z": "509b5567.a7a30c",
+        "name": "Power Below 3.8w?",
+        "server": "b9b14ebe.542fc",
+        "version": 2,
+        "outputs": 2,
+        "halt_if": "3.8",
+        "halt_if_type": "num",
+        "halt_if_compare": "gte",
+        "entity_id": "sensor.washing_machine_2_power",
+        "state_type": "str",
+        "blockInputOverrides": false,
+        "outputProperties": [
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            }
+        ],
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 210,
+        "y": 300,
+        "wires": [
+            [],
+            [
+                "3f5df20.ee8f30e"
+            ]
+        ]
+    },
+    {
+        "id": "85a8aead.9cd25",
+        "type": "api-call-service",
+        "z": "509b5567.a7a30c",
+        "name": "Display Entities Off",
+        "server": "b9b14ebe.542fc",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "input_boolean",
+        "service": "turn_off",
+        "entityId": "input_boolean.party_on, input_boolean.party_off, input_boolean.washing_started",
+        "data": "",
+        "dataType": "jsonata",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 210,
+        "y": 480,
+        "wires": [
+            [
+                "a3feda9a.eb65f8"
+            ]
+        ]
+    },
+    {
+        "id": "a3feda9a.eb65f8",
+        "type": "api-call-service",
+        "z": "509b5567.a7a30c",
+        "name": "Display Entities On",
+        "server": "b9b14ebe.542fc",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "input_boolean",
+        "service": "turn_on",
+        "entityId": "input_boolean.washing_finished",
+        "data": "",
+        "dataType": "jsonata",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 210,
+        "y": 560,
+        "wires": [
+            [
+                "f4d03477.020d18"
+            ]
+        ]
+    },
+    {
+        "id": "d8ba69b5.cce848",
+        "type": "api-call-service",
+        "z": "509b5567.a7a30c",
+        "name": "Send Announcement",
+        "server": "b9b14ebe.542fc",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "tts",
+        "service": "google_translate_say",
+        "entityId": "media_player.foyer_button_display_speaker",
+        "data": "{\"message\":\"Your washing has finished! You can put it in the dryer!\"}",
+        "dataType": "jsonata",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 760,
+        "y": 480,
+        "wires": [
+            [
+                "39269a6e.92ba26"
+            ]
+        ]
+    },
+    {
+        "id": "bbbc7242.bb1ff",
+        "type": "api-call-service",
+        "z": "509b5567.a7a30c",
+        "name": "Turn on Casting",
+        "server": "b9b14ebe.542fc",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "automation",
+        "service": "turn_on",
+        "entityId": "automation.cast_to_foyer_button_display",
+        "data": "",
+        "dataType": "jsonata",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 920,
+        "y": 540,
+        "wires": [
+            [
+                "d486be96.d993f"
+            ]
+        ]
+    },
+    {
+        "id": "f4d03477.020d18",
+        "type": "api-call-service",
+        "z": "509b5567.a7a30c",
+        "name": "Turn off Casting",
+        "server": "b9b14ebe.542fc",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "automation",
+        "service": "turn_off",
+        "entityId": "automation.cast_to_foyer_button_display",
+        "data": "",
+        "dataType": "jsonata",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 480,
+        "y": 480,
+        "wires": [
+            [
+                "6b01c849.705218"
+            ]
+        ]
+    },
+    {
+        "id": "6b01c849.705218",
+        "type": "api-call-service",
+        "z": "509b5567.a7a30c",
+        "name": "Disrupt Cast",
+        "server": "b9b14ebe.542fc",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "media_player",
+        "service": "turn_off",
+        "entityId": "media_player.foyer_button_display_speaker",
+        "data": "",
+        "dataType": "jsonata",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 490,
+        "y": 560,
+        "wires": [
+            [
+                "d8ba69b5.cce848"
+            ]
+        ]
+    },
+    {
+        "id": "d486be96.d993f",
+        "type": "api-call-service",
+        "z": "509b5567.a7a30c",
+        "name": "Trigger Cast",
+        "server": "b9b14ebe.542fc",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "automation",
+        "service": "trigger",
+        "entityId": "automation.cast_to_foyer_button_display",
+        "data": "",
+        "dataType": "jsonata",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 1130,
+        "y": 540,
+        "wires": [
+            [
+                "2cb07408.5d403c"
+            ]
+        ]
+    },
+    {
+        "id": "27f25e62.e885c2",
+        "type": "api-call-service",
+        "z": "509b5567.a7a30c",
+        "name": "Send Announcement",
+        "server": "b9b14ebe.542fc",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "tts",
+        "service": "google_translate_say",
+        "entityId": "media_player.foyer_button_display_speaker",
+        "data": "{\"message\":\"Your washing has started! I'll notify you when it is done!\"}",
+        "dataType": "jsonata",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 760,
+        "y": 300,
+        "wires": [
+            [
+                "f516e79d.59ee58"
+            ]
+        ]
+    },
+    {
+        "id": "a546cb2.b869438",
+        "type": "api-call-service",
+        "z": "509b5567.a7a30c",
+        "name": "Turn off Casting",
+        "server": "b9b14ebe.542fc",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "automation",
+        "service": "turn_off",
+        "entityId": "automation.cast_to_foyer_button_display",
+        "data": "",
+        "dataType": "jsonata",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 780,
+        "y": 220,
+        "wires": [
+            [
+                "309c889f.eea148"
+            ]
+        ]
+    },
+    {
+        "id": "309c889f.eea148",
+        "type": "api-call-service",
+        "z": "509b5567.a7a30c",
+        "name": "Disrupt Cast",
+        "server": "b9b14ebe.542fc",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "media_player",
+        "service": "turn_off",
+        "entityId": "media_player.foyer_button_display_speaker",
+        "data": "",
+        "dataType": "jsonata",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 990,
+        "y": 220,
+        "wires": [
+            [
+                "27f25e62.e885c2"
+            ]
+        ]
+    },
+    {
+        "id": "39269a6e.92ba26",
+        "type": "delay",
+        "z": "509b5567.a7a30c",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "40",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 720,
+        "y": 540,
+        "wires": [
+            [
+                "bbbc7242.bb1ff"
+            ]
+        ]
+    },
+    {
+        "id": "45612214.8ac82c",
+        "type": "api-call-service",
+        "z": "509b5567.a7a30c",
+        "name": "Turn on Casting",
+        "server": "b9b14ebe.542fc",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "automation",
+        "service": "turn_on",
+        "entityId": "automation.cast_to_foyer_button_display",
+        "data": "",
+        "dataType": "jsonata",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 1300,
+        "y": 140,
+        "wires": [
+            [
+                "7ed05aea.86d564"
+            ]
+        ]
+    },
+    {
+        "id": "7ed05aea.86d564",
+        "type": "api-call-service",
+        "z": "509b5567.a7a30c",
+        "name": "Trigger Cast",
+        "server": "b9b14ebe.542fc",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "automation",
+        "service": "trigger",
+        "entityId": "automation.cast_to_foyer_button_display",
+        "data": "",
+        "dataType": "jsonata",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "on",
+                "valueType": "str"
+            }
+        ],
+        "queue": "none",
+        "x": 1290,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f516e79d.59ee58",
+        "type": "delay",
+        "z": "509b5567.a7a30c",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "40",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 980,
+        "y": 300,
+        "wires": [
+            [
+                "45612214.8ac82c"
+            ]
+        ]
+    },
+    {
+        "id": "36c699ab.c9eb16",
+        "type": "api-call-service",
+        "z": "509b5567.a7a30c",
+        "name": "Return entities to normal",
+        "server": "b9b14ebe.542fc",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "input_boolean",
+        "service": "turn_off",
+        "entityId": "input_boolean.washing_finished",
+        "data": "",
+        "dataType": "jsonata",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 950,
+        "y": 600,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2cb07408.5d403c",
+        "type": "delay",
+        "z": "509b5567.a7a30c",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "30",
+        "timeoutUnits": "minutes",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 730,
+        "y": 600,
+        "wires": [
+            [
+                "36c699ab.c9eb16"
+            ]
+        ]
+    },
+    {
+        "id": "db44a5ff.735248",
+        "type": "api-current-state",
+        "z": "509b5567.a7a30c",
+        "name": "Washing State On/Off",
+        "server": "b9b14ebe.542fc",
+        "version": 2,
+        "outputs": 2,
+        "halt_if": "on",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_boolean.washing_started",
+        "state_type": "str",
+        "blockInputOverrides": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            }
+        ],
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 520,
+        "y": 140,
+        "wires": [
+            [],
+            [
+                "11acc240.980d2e"
+            ]
+        ]
+    },
+    {
+        "id": "65f82fcf.bba87",
+        "type": "api-current-state",
+        "z": "509b5567.a7a30c",
+        "name": "Washing State On/Off",
+        "server": "b9b14ebe.542fc",
+        "version": 2,
+        "outputs": 2,
+        "halt_if": "on",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_boolean.washing_started",
+        "state_type": "str",
+        "blockInputOverrides": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            }
+        ],
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 380,
+        "y": 240,
+        "wires": [
+            [
+                "ee42e8e8.78a238"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "3f5df20.ee8f30e",
+        "type": "delay",
+        "z": "509b5567.a7a30c",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "5",
+        "timeoutUnits": "minutes",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 180,
+        "y": 360,
+        "wires": [
+            [
+                "a41f3b06.c2d788"
+            ]
+        ]
+    },
+    {
+        "id": "24d98ce2.2346a4",
+        "type": "api-current-state",
+        "z": "509b5567.a7a30c",
+        "name": "Power Below 3.8w?",
+        "server": "b9b14ebe.542fc",
+        "version": 2,
+        "outputs": 2,
+        "halt_if": "3.8",
+        "halt_if_type": "num",
+        "halt_if_compare": "gte",
+        "entity_id": "sensor.washing_machine_2_power",
+        "state_type": "str",
+        "blockInputOverrides": false,
+        "outputProperties": [
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            }
+        ],
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 210,
+        "y": 420,
+        "wires": [
+            [],
+            [
+                "85a8aead.9cd25"
+            ]
+        ]
+    },
+    {
+        "id": "a41f3b06.c2d788",
+        "type": "api-current-state",
+        "z": "509b5567.a7a30c",
+        "name": "Washing State On/Off",
+        "server": "b9b14ebe.542fc",
+        "version": 2,
+        "outputs": 2,
+        "halt_if": "on",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_boolean.washing_started",
+        "state_type": "str",
+        "blockInputOverrides": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            }
+        ],
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 380,
+        "y": 360,
+        "wires": [
+            [
+                "24d98ce2.2346a4"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "b9b14ebe.542fc",
+        "type": "server",
+        "name": "Home Assistant",
+        "version": 1,
+        "legacy": false,
+        "addon": true,
+        "rejectUnauthorizedCerts": true,
+        "ha_boolean": "y|yes|true|on|home|open",
+        "connectionDelay": true,
+        "cacheJson": true
+    }
+]

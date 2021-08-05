@@ -1,0 +1,634 @@
+[
+    {
+        "id": "11367017.59e2b",
+        "type": "tab",
+        "label": "Smaller Background Automations",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "9b20e3a7.d1c1",
+        "type": "server-state-changed",
+        "z": "11367017.59e2b",
+        "name": "Wall Light On/Off",
+        "server": "b9b14ebe.542fc",
+        "version": 3,
+        "exposeToHomeAssistant": false,
+        "haConfig": [
+            {
+                "property": "name",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            }
+        ],
+        "entityidfilter": "light.rubens_bedroom_wall_light",
+        "entityidfiltertype": "exact",
+        "outputinitially": false,
+        "state_type": "str",
+        "haltifstate": "on",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "outputs": 2,
+        "output_only_on_state_change": true,
+        "for": 0,
+        "forType": "num",
+        "forUnits": "minutes",
+        "ignorePrevStateNull": false,
+        "ignorePrevStateUnknown": false,
+        "ignorePrevStateUnavailable": false,
+        "ignoreCurrentStateUnknown": false,
+        "ignoreCurrentStateUnavailable": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            }
+        ],
+        "x": 140,
+        "y": 140,
+        "wires": [
+            [
+                "24af6a7d.f554e6"
+            ],
+            [
+                "44391f62.8300a"
+            ]
+        ]
+    },
+    {
+        "id": "24af6a7d.f554e6",
+        "type": "api-call-service",
+        "z": "11367017.59e2b",
+        "name": "Run Daylight Scene",
+        "server": "b9b14ebe.542fc",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "scene",
+        "service": "turn_on",
+        "entityId": "scene.daylight_default_strip",
+        "data": "",
+        "dataType": "jsonata",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 380,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "44391f62.8300a",
+        "type": "api-call-service",
+        "z": "11367017.59e2b",
+        "name": "Turn Off Strip Light",
+        "server": "b9b14ebe.542fc",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "light",
+        "service": "turn_off",
+        "entityId": "light.rubens_bedroom_light_strip",
+        "data": "",
+        "dataType": "jsonata",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 370,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "30bd4263.d898be",
+        "type": "poll-state",
+        "z": "11367017.59e2b",
+        "name": "Info Display",
+        "server": "b9b14ebe.542fc",
+        "version": 1,
+        "exposeToHomeAssistant": false,
+        "haConfig": [
+            {
+                "property": "name",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            }
+        ],
+        "updateinterval": "1",
+        "updateIntervalUnits": "hours",
+        "outputinitially": false,
+        "outputonchanged": false,
+        "entity_id": "automation.cast_to_google_hub",
+        "state_type": "str",
+        "halt_if": "on",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "outputs": 2,
+        "x": 150,
+        "y": 280,
+        "wires": [
+            [
+                "e3843720.3f6288"
+            ],
+            [
+                "e3843720.3f6288"
+            ]
+        ]
+    },
+    {
+        "id": "e3843720.3f6288",
+        "type": "light-scheduler-filter",
+        "z": "11367017.59e2b",
+        "settings": "d76dbee3.f413",
+        "events": "[{\"start\":{\"dow\":1,\"mod\":420},\"end\":{\"dow\":2,\"mod\":0}},{\"start\":{\"dow\":2,\"mod\":420},\"end\":{\"dow\":3,\"mod\":0}},{\"start\":{\"dow\":3,\"mod\":420},\"end\":{\"dow\":4,\"mod\":0}},{\"start\":{\"dow\":4,\"mod\":420},\"end\":{\"dow\":5,\"mod\":0}},{\"start\":{\"dow\":5,\"mod\":420},\"end\":{\"dow\":6,\"mod\":0}},{\"start\":{\"dow\":6,\"mod\":420},\"end\":{\"dow\":0,\"mod\":0}},{\"start\":{\"dow\":0,\"mod\":420},\"end\":{\"dow\":1,\"mod\":910}}]",
+        "name": "",
+        "onlyWhenDark": false,
+        "scheduleRndMax": 0,
+        "sunElevationThreshold": 6,
+        "sunShowElevationInStatus": false,
+        "x": 380,
+        "y": 320,
+        "wires": [
+            [
+                "4fa3455b.56188c"
+            ],
+            [
+                "a3f246e1.bb7638"
+            ]
+        ]
+    },
+    {
+        "id": "4fa3455b.56188c",
+        "type": "api-call-service",
+        "z": "11367017.59e2b",
+        "name": "Turn on Casting",
+        "server": "b9b14ebe.542fc",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "automation",
+        "service": "turn_on",
+        "entityId": "automation.cast_to_google_hub, automation.cast_to_foyer_button_display",
+        "data": "",
+        "dataType": "jsonata",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 640,
+        "y": 280,
+        "wires": [
+            [
+                "78b18b59.749a54"
+            ]
+        ]
+    },
+    {
+        "id": "39fa6adb.7c45d6",
+        "type": "poll-state",
+        "z": "11367017.59e2b",
+        "name": "Button Display",
+        "server": "b9b14ebe.542fc",
+        "version": 1,
+        "exposeToHomeAssistant": false,
+        "haConfig": [
+            {
+                "property": "name",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            }
+        ],
+        "updateinterval": "1",
+        "updateIntervalUnits": "hours",
+        "outputinitially": false,
+        "outputonchanged": false,
+        "entity_id": "automation.cast_to_foyer_button_display",
+        "state_type": "str",
+        "halt_if": "on",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "outputs": 2,
+        "x": 150,
+        "y": 360,
+        "wires": [
+            [
+                "e3843720.3f6288"
+            ],
+            [
+                "e3843720.3f6288"
+            ]
+        ]
+    },
+    {
+        "id": "a3f246e1.bb7638",
+        "type": "api-call-service",
+        "z": "11367017.59e2b",
+        "name": "Turn off Casting",
+        "server": "b9b14ebe.542fc",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "automation",
+        "service": "turn_off",
+        "entityId": "automation.cast_to_google_hub, automation.cast_to_foyer_button_display",
+        "data": "",
+        "dataType": "jsonata",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 640,
+        "y": 360,
+        "wires": [
+            [
+                "c6287783.98eb28"
+            ]
+        ]
+    },
+    {
+        "id": "c6287783.98eb28",
+        "type": "api-call-service",
+        "z": "11367017.59e2b",
+        "name": "Disrupt Cast",
+        "server": "b9b14ebe.542fc",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "media_player",
+        "service": "turn_off",
+        "entityId": "media_player.foyer_button_display_speaker, media_player.foyer_display",
+        "data": "",
+        "dataType": "jsonata",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 850,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "78b18b59.749a54",
+        "type": "api-call-service",
+        "z": "11367017.59e2b",
+        "name": "Trigger Cast",
+        "server": "b9b14ebe.542fc",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "automation",
+        "service": "trigger",
+        "entityId": "automation.cast_to_foyer_button_display, automation.cast_to_google_hub",
+        "data": "",
+        "dataType": "jsonata",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 850,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "adb3009e.564cb",
+        "type": "server-state-changed",
+        "z": "11367017.59e2b",
+        "name": "Door Sensor Power",
+        "server": "b9b14ebe.542fc",
+        "version": 3,
+        "exposeToHomeAssistant": false,
+        "haConfig": [
+            {
+                "property": "name",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            }
+        ],
+        "entityidfilter": "sensor.door_guage_power",
+        "entityidfiltertype": "exact",
+        "outputinitially": false,
+        "state_type": "str",
+        "haltifstate": "30",
+        "halt_if_type": "num",
+        "halt_if_compare": "gte",
+        "outputs": 2,
+        "output_only_on_state_change": true,
+        "for": 0,
+        "forType": "num",
+        "forUnits": "minutes",
+        "ignorePrevStateNull": false,
+        "ignorePrevStateUnknown": false,
+        "ignorePrevStateUnavailable": false,
+        "ignoreCurrentStateUnknown": false,
+        "ignoreCurrentStateUnavailable": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "eventData"
+            },
+            {
+                "property": "topic",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "triggerId"
+            }
+        ],
+        "x": 230,
+        "y": 520,
+        "wires": [
+            [
+                "d5840b8c.025588"
+            ],
+            [
+                "84ff4241.6e3f8"
+            ]
+        ]
+    },
+    {
+        "id": "dbb7353e.cdeeb8",
+        "type": "server-state-changed",
+        "z": "11367017.59e2b",
+        "name": "Temperature Sensor Power",
+        "server": "b9b14ebe.542fc",
+        "version": 3,
+        "exposeToHomeAssistant": false,
+        "haConfig": [
+            {
+                "property": "name",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            }
+        ],
+        "entityidfilter": "sensor.temperature_gauge_power",
+        "entityidfiltertype": "exact",
+        "outputinitially": false,
+        "state_type": "str",
+        "haltifstate": "30",
+        "halt_if_type": "num",
+        "halt_if_compare": "gte",
+        "outputs": 2,
+        "output_only_on_state_change": true,
+        "for": 0,
+        "forType": "num",
+        "forUnits": "minutes",
+        "ignorePrevStateNull": false,
+        "ignorePrevStateUnknown": false,
+        "ignorePrevStateUnavailable": false,
+        "ignoreCurrentStateUnknown": false,
+        "ignoreCurrentStateUnavailable": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "eventData"
+            },
+            {
+                "property": "topic",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "triggerId"
+            }
+        ],
+        "x": 210,
+        "y": 560,
+        "wires": [
+            [
+                "d5840b8c.025588"
+            ],
+            [
+                "84ff4241.6e3f8"
+            ]
+        ]
+    },
+    {
+        "id": "52ba120f.92a1bc",
+        "type": "server-state-changed",
+        "z": "11367017.59e2b",
+        "name": "Button Sensor Power",
+        "server": "b9b14ebe.542fc",
+        "version": 3,
+        "exposeToHomeAssistant": false,
+        "haConfig": [
+            {
+                "property": "name",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            }
+        ],
+        "entityidfilter": "sensor.lights_button_power",
+        "entityidfiltertype": "exact",
+        "outputinitially": false,
+        "state_type": "str",
+        "haltifstate": "30",
+        "halt_if_type": "num",
+        "halt_if_compare": "gte",
+        "outputs": 2,
+        "output_only_on_state_change": true,
+        "for": 0,
+        "forType": "num",
+        "forUnits": "minutes",
+        "ignorePrevStateNull": false,
+        "ignorePrevStateUnknown": false,
+        "ignorePrevStateUnavailable": false,
+        "ignoreCurrentStateUnknown": false,
+        "ignoreCurrentStateUnavailable": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "eventData"
+            },
+            {
+                "property": "topic",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "triggerId"
+            }
+        ],
+        "x": 220,
+        "y": 600,
+        "wires": [
+            [
+                "d5840b8c.025588"
+            ],
+            [
+                "84ff4241.6e3f8"
+            ]
+        ]
+    },
+    {
+        "id": "b9df3661.eacc48",
+        "type": "server-state-changed",
+        "z": "11367017.59e2b",
+        "name": "Motion Sensor Power",
+        "server": "b9b14ebe.542fc",
+        "version": 3,
+        "exposeToHomeAssistant": false,
+        "haConfig": [
+            {
+                "property": "name",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            }
+        ],
+        "entityidfilter": "sensor.motion_detector_power",
+        "entityidfiltertype": "exact",
+        "outputinitially": false,
+        "state_type": "str",
+        "haltifstate": "30",
+        "halt_if_type": "num",
+        "halt_if_compare": "gte",
+        "outputs": 2,
+        "output_only_on_state_change": true,
+        "for": 0,
+        "forType": "num",
+        "forUnits": "minutes",
+        "ignorePrevStateNull": false,
+        "ignorePrevStateUnknown": false,
+        "ignorePrevStateUnavailable": false,
+        "ignoreCurrentStateUnknown": false,
+        "ignoreCurrentStateUnavailable": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "eventData"
+            },
+            {
+                "property": "topic",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "triggerId"
+            }
+        ],
+        "x": 220,
+        "y": 640,
+        "wires": [
+            [
+                "d5840b8c.025588"
+            ],
+            [
+                "84ff4241.6e3f8"
+            ]
+        ]
+    },
+    {
+        "id": "d5840b8c.025588",
+        "type": "api-call-service",
+        "z": "11367017.59e2b",
+        "name": "Power Above 30%",
+        "server": "b9b14ebe.542fc",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "input_boolean",
+        "service": "turn_on",
+        "entityId": "input_boolean.above_below_power",
+        "data": "",
+        "dataType": "jsonata",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 530,
+        "y": 520,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "84ff4241.6e3f8",
+        "type": "api-call-service",
+        "z": "11367017.59e2b",
+        "name": "Power Below 30%",
+        "server": "b9b14ebe.542fc",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "input_boolean",
+        "service": "turn_off",
+        "entityId": "input_boolean.above_below_power",
+        "data": "",
+        "dataType": "jsonata",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 530,
+        "y": 640,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b9b14ebe.542fc",
+        "type": "server",
+        "name": "Home Assistant",
+        "version": 1,
+        "legacy": false,
+        "addon": true,
+        "rejectUnauthorizedCerts": true,
+        "ha_boolean": "y|yes|true|on|home|open",
+        "connectionDelay": true,
+        "cacheJson": true
+    },
+    {
+        "id": "d76dbee3.f413",
+        "type": "light-scheduler-settings",
+        "name": "Home",
+        "latitude": "43.635630",
+        "longitude": "-79.426870"
+    }
+]

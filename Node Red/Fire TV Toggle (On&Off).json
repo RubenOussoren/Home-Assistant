@@ -1,0 +1,146 @@
+[
+    {
+        "id": "5fb3880e.f0e4a8",
+        "type": "tab",
+        "label": "Fire TV Toggle (On/Off)",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "898f7639.498bc8",
+        "type": "server-state-changed",
+        "z": "5fb3880e.f0e4a8",
+        "name": "TV On/Off",
+        "server": "b9b14ebe.542fc",
+        "version": 3,
+        "exposeToHomeAssistant": false,
+        "haConfig": [
+            {
+                "property": "name",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            }
+        ],
+        "entityidfilter": "input_boolean.living_room_tv_button",
+        "entityidfiltertype": "exact",
+        "outputinitially": false,
+        "state_type": "str",
+        "haltifstate": "on",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "outputs": 2,
+        "output_only_on_state_change": true,
+        "for": 0,
+        "forType": "num",
+        "forUnits": "minutes",
+        "ignorePrevStateNull": false,
+        "ignorePrevStateUnknown": false,
+        "ignorePrevStateUnavailable": false,
+        "ignoreCurrentStateUnknown": false,
+        "ignoreCurrentStateUnavailable": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            }
+        ],
+        "x": 160,
+        "y": 180,
+        "wires": [
+            [
+                "9a01cb26.cde1b8"
+            ],
+            [
+                "bdf2423.bb750c"
+            ]
+        ]
+    },
+    {
+        "id": "80bd4861.249d28",
+        "type": "api-call-service",
+        "z": "5fb3880e.f0e4a8",
+        "name": "TV to Netflix",
+        "server": "b9b14ebe.542fc",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "media_player",
+        "service": "select_source",
+        "entityId": "media_player.living_room_tv",
+        "data": "{\"source\":\"com.netflix.ninja\"}",
+        "dataType": "json",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 510,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9a01cb26.cde1b8",
+        "type": "api-call-service",
+        "z": "5fb3880e.f0e4a8",
+        "name": "TV On",
+        "server": "b9b14ebe.542fc",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "media_player",
+        "service": "turn_on",
+        "entityId": "media_player.living_room_tv",
+        "data": "",
+        "dataType": "json",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 330,
+        "y": 140,
+        "wires": [
+            [
+                "80bd4861.249d28"
+            ]
+        ]
+    },
+    {
+        "id": "bdf2423.bb750c",
+        "type": "api-call-service",
+        "z": "5fb3880e.f0e4a8",
+        "name": "TV Off",
+        "server": "b9b14ebe.542fc",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "media_player",
+        "service": "turn_off",
+        "entityId": "media_player.living_room_tv",
+        "data": "",
+        "dataType": "json",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 330,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b9b14ebe.542fc",
+        "type": "server",
+        "name": "Home Assistant",
+        "version": 1,
+        "legacy": false,
+        "addon": true,
+        "rejectUnauthorizedCerts": true,
+        "ha_boolean": "y|yes|true|on|home|open",
+        "connectionDelay": true,
+        "cacheJson": true
+    }
+]

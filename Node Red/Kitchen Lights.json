@@ -1,0 +1,262 @@
+[
+    {
+        "id": "78c83a11.a23904",
+        "type": "tab",
+        "label": "KItchen Lights",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "a96000ea.ce243",
+        "type": "server-state-changed",
+        "z": "78c83a11.a23904",
+        "name": "Motion Detector On/Off",
+        "server": "b9b14ebe.542fc",
+        "version": 3,
+        "exposeToHomeAssistant": false,
+        "haConfig": [
+            {
+                "property": "name",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            }
+        ],
+        "entityidfilter": "binary_sensor.motion_detector",
+        "entityidfiltertype": "exact",
+        "outputinitially": false,
+        "state_type": "str",
+        "haltifstate": "on",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "outputs": 2,
+        "output_only_on_state_change": true,
+        "for": 0,
+        "forType": "num",
+        "forUnits": "minutes",
+        "ignorePrevStateNull": false,
+        "ignorePrevStateUnknown": false,
+        "ignorePrevStateUnavailable": false,
+        "ignoreCurrentStateUnknown": false,
+        "ignoreCurrentStateUnavailable": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            }
+        ],
+        "x": 220,
+        "y": 180,
+        "wires": [
+            [
+                "67807fd3.502dd",
+                "1382ac9f.31f013"
+            ],
+            [
+                "d7a3f454.1e59e8"
+            ]
+        ]
+    },
+    {
+        "id": "27bbef73.f5f32",
+        "type": "api-call-service",
+        "z": "78c83a11.a23904",
+        "name": "Main Lights On",
+        "server": "b9b14ebe.542fc",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "light",
+        "service": "turn_on",
+        "entityId": "light.kitchen_main_lights",
+        "data": "",
+        "dataType": "json",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 680,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "67807fd3.502dd",
+        "type": "light-scheduler-filter",
+        "z": "78c83a11.a23904",
+        "settings": "d76dbee3.f413",
+        "events": "[{\"start\":{\"dow\":0,\"mod\":420},\"end\":{\"dow\":0,\"mod\":1410}},{\"start\":{\"dow\":6,\"mod\":420},\"end\":{\"dow\":6,\"mod\":1410}},{\"start\":{\"dow\":1,\"mod\":420},\"end\":{\"dow\":1,\"mod\":1410}},{\"start\":{\"dow\":2,\"mod\":420},\"end\":{\"dow\":2,\"mod\":1410}},{\"start\":{\"dow\":3,\"mod\":420},\"end\":{\"dow\":3,\"mod\":1410}},{\"start\":{\"dow\":4,\"mod\":420},\"end\":{\"dow\":4,\"mod\":1410}},{\"start\":{\"dow\":5,\"mod\":420},\"end\":{\"dow\":5,\"mod\":1410}}]",
+        "name": "7am to 11:30pm",
+        "onlyWhenDark": false,
+        "scheduleRndMax": 0,
+        "sunElevationThreshold": 6,
+        "sunShowElevationInStatus": false,
+        "x": 460,
+        "y": 160,
+        "wires": [
+            [
+                "27bbef73.f5f32"
+            ],
+            [
+                "f2a169f.1422598"
+            ]
+        ]
+    },
+    {
+        "id": "f2a169f.1422598",
+        "type": "api-call-service",
+        "z": "78c83a11.a23904",
+        "name": "Cabinet Lights On",
+        "server": "b9b14ebe.542fc",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "light",
+        "service": "turn_on",
+        "entityId": "light.kitchen_cabinet_lights",
+        "data": "",
+        "dataType": "json",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 690,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "48466842.902448",
+        "type": "api-call-service",
+        "z": "78c83a11.a23904",
+        "name": "Kitchen Lights Off",
+        "server": "b9b14ebe.542fc",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "light",
+        "service": "turn_off",
+        "entityId": "light.kitchen_cabinet_lights, light.kitchen_main_lights",
+        "data": "",
+        "dataType": "json",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 730,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b61f1de3.30621",
+        "type": "api-current-state",
+        "z": "78c83a11.a23904",
+        "name": "Confirm \"Clear\" State",
+        "server": "b9b14ebe.542fc",
+        "version": 2,
+        "outputs": 2,
+        "halt_if": "on",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "binary_sensor.motion_detector",
+        "state_type": "str",
+        "blockInputOverrides": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            }
+        ],
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 480,
+        "y": 320,
+        "wires": [
+            [
+                "1382ac9f.31f013"
+            ],
+            [
+                "48466842.902448"
+            ]
+        ]
+    },
+    {
+        "id": "d7a3f454.1e59e8",
+        "type": "delay",
+        "z": "78c83a11.a23904",
+        "name": "",
+        "pauseType": "delayv",
+        "timeout": "1.3",
+        "timeoutUnits": "minutes",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 440,
+        "y": 220,
+        "wires": [
+            [
+                "b61f1de3.30621"
+            ]
+        ]
+    },
+    {
+        "id": "1382ac9f.31f013",
+        "type": "change",
+        "z": "78c83a11.a23904",
+        "name": "Override Delay",
+        "rules": [
+            {
+                "t": "set",
+                "p": "reset",
+                "pt": "msg",
+                "to": "1",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 240,
+        "y": 260,
+        "wires": [
+            [
+                "d7a3f454.1e59e8"
+            ]
+        ]
+    },
+    {
+        "id": "b9b14ebe.542fc",
+        "type": "server",
+        "name": "Home Assistant",
+        "version": 1,
+        "legacy": false,
+        "addon": true,
+        "rejectUnauthorizedCerts": true,
+        "ha_boolean": "y|yes|true|on|home|open",
+        "connectionDelay": true,
+        "cacheJson": true
+    },
+    {
+        "id": "d76dbee3.f413",
+        "type": "light-scheduler-settings",
+        "name": "Home",
+        "latitude": "43.635630",
+        "longitude": "-79.426870"
+    }
+]
